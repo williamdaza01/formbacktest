@@ -4,10 +4,11 @@ import csv
 from app.models import UserCsv
 
 def upload_csv(request):
-    if request.method == 'POST' and request.FILES['csv_file']:
-        csv_file = request.FILES['csv_file']
+    #key is for example 'csv' or 'csv_file' into request.FILES[]
+    if request.method == 'POST' and request.FILES['csv']:
+        csv_file = request.FILES['csv']
         decoded_file = csv_file.read().decode('utf-8')
-        csv_data = csv.reader(decoded_file.splitlines(), delimiter=',')
+        csv_data = csv.reader(decoded_file.splitlines(), delimiter=';')
         next(csv_data)
         
         for row in csv_data:
